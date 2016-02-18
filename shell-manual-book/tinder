@@ -1,0 +1,4 @@
+#!/bin/sh
+
+#finduer -- find if the user in online
+who | grep $1
