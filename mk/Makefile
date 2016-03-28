@@ -3,27 +3,39 @@
 
 CC:=gcc
 
-FLAGS:= -O2 -Wall
+BIN:= ./bin/ 
 
-VPATH = ./src/:./heads/
+CFLAGS:= -O2 -Wall
+#file dirs
+VPATH := ./src/:./heads/
 
-heads = my_api_add.h my_api_mul.h my_api_sub.h 
-files = my_api_add.c my_api_sub.c my_api_mul.c
+INC := -I./heads/
 
-objects = main.o my_api_add.o my_api_sub.o my_api_mul.o
+heads := my_api_add.h my_api_mul.h my_api_sub.h 
 
+files := main.c my_api_add.c my_api_sub.c my_api_mul.c
+#objects := main.o my_api_add.o my_api_sub.o my_api_mul.o
+objects := $(files:.c=.o) #nice tech.
+
+TARGET := hello  
 #$(objects):$(filter %.c,$(files)) $(heads)
 hello:$(objects) 
-	$(CC) $(FLAGS) -o hello $(objects)
+	$(CC) $(CFLAGS) -o hello $(objects)
 
-	@echo "going to compile..."
-	@echo doen ...2
+	@echo "compile done!"
+	#@echo doen ...2
+	#@mv hello ./bin/
+	#@rm -rf *.o	
+	
+#Use this to define more targets.
 
-	@mv hello ./bin/
-	
-	#@echo "clean ?"
-	@rm -rf *.o	
-	
-.PHONY:clean
+.PHONY:all install clean print
+
+all:hello 
+	@echo "make all"
+install:
+	@echo "make install"
+	mv $(TARGET)  $(BIN)
 clean:
-	@rm -rf $(objects)
+	@echo "make clean"
+	rm -rf $(objects)
