@@ -1,5 +1,8 @@
 #basic paragramme makefile
 
+
+echo "$(wildcard *.mk)"
+
 hello += main.o func.o func2.o
 
 target:=hello
